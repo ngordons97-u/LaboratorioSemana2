@@ -18,25 +18,30 @@ public class CalculadoraServiceImpl implements CalculadoraService {
 	@Override
 	public List<Calculadora> obtenerInversion() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return calculadoraRepository.findAll();
+		
 	}
 
 	@Override
 	public Calculadora obtenerPorId(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return calculadoraRepository.findById(id).orElse(null);
+		
 	}
 
 	@Override
 	public Calculadora crearInversion(Calculadora calculadora) {
 		// TODO Auto-generated method stub
-		return null;
+		return calculadoraRepository.save(calculadora);
+		
 	}
 
 	@Override
 	public Long contarClientes() {
 		// TODO Auto-generated method stub
-		return null;
+		return calculadoraRepository.count();
+	
 	}
 
 	

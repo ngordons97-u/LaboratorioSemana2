@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listado de Inversiones</title>
+  <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+</head>
+<body>
+
+<h1>Listado de clientes</h1>
+<table>
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Edad</th>
+<th>Acciones</th>
+
+</tr>
+<tr th:each="cliente : ${listarClientes}">
+<td th:text="${cliente.id}"></td>
+<td th:text="${cliente.nombres}"></td>
+<td th:text="${cliente.edad}"></td>
+<td>
+<a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}">Eliminar</a>
+</td>
+<td>
+<a th:href="@{/clientes/actualiza/{id}(id=${cliente.id})}">Editar</a>
+</td>
+</tr>
+
+</table>
+
+<a href="/clientes/nueva">Nuevo Cliente</a>
+
+</body>
+</html>
