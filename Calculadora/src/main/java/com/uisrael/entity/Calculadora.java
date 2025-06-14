@@ -31,7 +31,16 @@ public class Calculadora {
 	@Nonnull
 	private double capital;
 	@Nonnull
-	private Integer periodo;
+	private int periodo;
 	@Nonnull
-	private Integer tiempo;
+	private int tiempo;
+	@Nonnull
+	private double tasa;
+	@Nonnull
+	private double monto;
+	@Nonnull
+	private double interes;
+	@Nonnull
+	private String categoria;
+	
 }

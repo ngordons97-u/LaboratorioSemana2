@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Formulario de Inversiones</title>
+<link rel="stylesheet" th:href="@{/css/estilos.css}" />
+</head>
+<body>
+
+<h1>Formulario de inversiones</h1>
+
+<!-- Mostrar mensaje de error si existe -->
+<div th:if="${error}" style="color: red;">
+    <p th:text="${error}"></p>
+</div>
+
+<form th:object="${calculadora}" th:action="@{/calculadora/nueva}" method="post">
+    <label>Nombres</label><input type="text" th:field="*{nombres}"><br/>
+    <label>Cédula</label><input type="text" th:field="*{cedula}"><br/>
+    <label>Email</label><input type="email" th:field="*{email}"><br/>
+    <label>Celular</label><input type="text" th:field="*{celular}"><br/>
+    <label>Capital inicial (USD): </label><input type="number" th:field="*{capital}" min="100"><br/>
+    <label>Periodo por año</label><br/>
+    <select th:field="*{periodo}" required>
+        <option value="2">Semestral</option>
+        <option value="4">Trimestral</option>
+        <option value="12">Mensual</option>
+    </select><br>
+    <label>Tiempo (en años):</label><input type="number" th:field="*{tiempo}" min="1"><br/>
+    
+    <button type="submit">Calcular</button>
+</form>
+
+<a href="/calculadora">Volver a listado de Inversiones</a>
+
+</body>
+</html>

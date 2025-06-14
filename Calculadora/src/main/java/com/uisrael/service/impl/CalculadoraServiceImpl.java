@@ -44,5 +44,39 @@ public class CalculadoraServiceImpl implements CalculadoraService {
 	
 	}
 
+	@Override
+	public double obtenerTasa(int n) {
+		// TODO Auto-generated method stub
+		return switch (n) {
+        case 2 -> 0.05;  // Semestral
+        case 4 -> 0.07;  // Trimestral
+        case 12 -> 0.11; // Mensual
+        default -> 0.0;
+    };
+	}
+
+	@Override
+	public String categorizarCliente(double capital, int n) {
+		// TODO Auto-generated method stub
+		if (n == 12 || n==4 || n==2 ) {
+			if (capital >= 100 && capital <= 500) {
+                return "Categoría 3";
+            } else if (capital >= 501 && capital <= 1000) {
+                return "Categoría 2";
+            } else if (capital > 1000) {
+                return "Categoría 1";
+            }
+        }
+        return "Sin categoría";
+	}
+
+	@Override
+	public double calcularMontoFinal(double capitalInicial, double tasa, int numeroPeriodos, int tiempo) {
+		// TODO Auto-generated method stub
+        return capitalInicial * Math.pow(1 + tasa / numeroPeriodos, numeroPeriodos * tiempo);
+
+	}
+	
+
 	
 }

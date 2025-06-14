@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Listado de Inversiones</title>
-  <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+    <meta charset="UTF-8">
+    <title>Listado de Inversiones</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
 </head>
 <body>
 
-<h1>Listado de clientes</h1>
-<table>
-<tr>
-<th>ID</th>
-<th>Nombre</th>
-<th>Edad</th>
-<th>Acciones</th>
+<h1>Simulaciones de Inversiones</h1>
 
-</tr>
-<tr th:each="cliente : ${listarClientes}">
-<td th:text="${cliente.id}"></td>
-<td th:text="${cliente.nombres}"></td>
-<td th:text="${cliente.edad}"></td>
-<td>
-<a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}">Eliminar</a>
-</td>
-<td>
-<a th:href="@{/clientes/actualiza/{id}(id=${cliente.id})}">Editar</a>
-</td>
-</tr>
-
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nombres</th>
+            <th>Cédula</th>
+            <th>Email</th>
+            <th>Celular</th>
+            <th>Capital Inicial</th>
+            <th>Periodo (por año)</th>
+            <th>Tiempo (años)</th>
+            <th>Tasa (%)</th>
+            <th>Monto Final</th>
+            <th>Interés Ganado</th>
+            <th>Categoría</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${simulaciones}">
+            <td th:text="${item.nombres}"></td>
+            <td th:text="${item.cedula}"></td>
+            <td th:text="${item.email}"></td>
+            <td th:text="${item.celular}"></td>
+            <td th:text="${#numbers.formatDecimal(item.capital, 1, 'COMMA', 2, 'POINT')}"></td>
+            <td th:text="${item.periodo}"></td>
+            <td th:text="${item.tiempo}"></td>
+            <td th:text="${item.tasa * 100} + '%'"></td>
+            <td th:text="${#numbers.formatDecimal(item.monto, 1, 'COMMA', 2, 'POINT')}"></td>
+            <td th:text="${#numbers.formatDecimal(item.interes, 1, 'COMMA', 2, 'POINT')}"></td>
+            <td th:text="${item.categoria}"></td>
+        </tr>
+    </tbody>
 </table>
 
-<a href="/clientes/nueva">Nuevo Cliente</a>
+<br/>
+<a href="/calculadora/nueva">Realizar nueva simulación</a>
 
 </body>
 </html>

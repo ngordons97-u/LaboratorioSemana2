@@ -11,4 +11,11 @@ public interface CalculadoraService {
 	//Calculadora actualizarInversion(Integer id, Calculadora cliente);
 	//void eliminarInversion(Integer id);
 	Long contarClientes();
+	
+	double obtenerTasa(int n);
+
+    String categorizarCliente(double capital, int n);
+
+    double calcularMontoFinal(double capitalInicial, double tasa, int numeroPeriodos, int tiempo);
+	
 }
