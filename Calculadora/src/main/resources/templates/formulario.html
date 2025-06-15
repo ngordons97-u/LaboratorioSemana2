@@ -15,23 +15,43 @@
 </div>
 
 <form th:object="${calculadora}" th:action="@{/calculadora/nueva}" method="post">
-    <label>Nombres</label><input type="text" th:field="*{nombres}"><br/>
-    <label>Cédula</label><input type="text" th:field="*{cedula}"><br/>
-    <label>Email</label><input type="email" th:field="*{email}"><br/>
-    <label>Celular</label><input type="text" th:field="*{celular}"><br/>
-    <label>Capital inicial (USD): </label><input type="number" th:field="*{capital}" min="100"><br/>
-    <label>Periodo por año</label><br/>
-    <select th:field="*{periodo}" required>
+   <label for="nombres">Nombres:</label>
+    <input type="text" id="nombres" th:field="*{nombres}">
+    <span th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}" style="color: red; font-size: 0.9em;"></span>
+    <br/>
+    <label for="cedula">Cédula:</label>
+    <input type="text" id="cedula" th:field="*{cedula}">
+    <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" style="color: red; font-size: 0.9em;"></span>
+    <br/>
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}">
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red; font-size: 0.9em;"></span>
+    <br/>
+    <label for="celular">Celular:</label>
+    <input type="text" id="celular" th:field="*{celular}">
+    <span th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}" style="color: red; font-size: 0.9em;"></span>
+    <br/>
+   <label for="capital">Capital inicial (USD): </label>
+    <input type="number" id="capital" th:field="*{capital}" >
+    <span th:if="${#fields.hasErrors('capital')}" th:errors="*{capital}" style="color: red; font-size: 0.9em;"></span>
+    <br/>
+    <label for="periodo">Periodo por año:</label><br/>
+    <select id="periodo" th:field="*{periodo}" required>
         <option value="2">Semestral</option>
         <option value="4">Trimestral</option>
         <option value="12">Mensual</option>
-    </select><br>
-    <label>Tiempo (en años):</label><input type="number" th:field="*{tiempo}" min="1"><br/>
+    </select>
+    <span th:if="${#fields.hasErrors('periodo')}" th:errors="*{periodo}" style="color: red; font-size: 0.9em;"></span>
+    <br>
+    <label for="tiempo">Tiempo (en años):</label>
+    <input type="number" id="tiempo" th:field="*{tiempo}">
+    <span th:if="${#fields.hasErrors('tiempo')}" th:errors="*{tiempo}" style="color: red; font-size: 0.9em;"></span>
+    <br/>
     
     <button type="submit">Calcular</button>
 </form>
 
-<a href="/calculadora">Volver a listado de Inversiones</a>
+<a href="/calculadora/resultados">Volver a listado de Inversiones</a>
 
 </body>
 </html>

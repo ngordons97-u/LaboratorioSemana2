@@ -6,6 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,19 +24,23 @@ public class Calculadora {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Nonnull
+	@NotBlank(message = "* El campo nombre no puede estar vacío.")
+	@Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$", message = "* El campo nombre solo puede contener letras y espacios.")
 	private String nombres;
-	@Nonnull
+	@NotBlank(message = "* La cédula no puede estar vacía.")
+    @Pattern(regexp = "^[0-9]{10}$", message = "* La campo cédula debe contener exactamente 10 dígitos numéricos.")
 	private String cedula;
-	@Nonnull
+	@NotBlank(message = "* El campoe mail no puede estar vacío.")
+    @Email(message = "* Por favor, ingresa un formato de correo electrónico válido.")
 	private String email;
-	@Nonnull
+	@NotBlank(message = "* El campo celular no puede estar vacío.")
+    @Pattern(regexp = "^[0-9]{10}$", message = "* El campo celular debe contener exactamente 10 dígitos numéricos.")
 	private String celular;
-	@Nonnull
+	@Min(value = 100, message = "* El campo capital inicial debe ser igual o mayor a 100 USD.")
 	private double capital;
 	@Nonnull
 	private int periodo;
-	@Nonnull
+	@Min(value = 1, message = "* El campo tiempo debe ser igual o mayor a 1 año.")
 	private int tiempo;
 	@Nonnull
 	private double tasa;
