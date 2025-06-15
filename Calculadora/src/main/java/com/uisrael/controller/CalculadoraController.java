@@ -8,9 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -36,51 +34,22 @@ public class CalculadoraController {
 	        return "listar";
 	    }
 	
-	/*
-	@GetMapping
-	public String listarInversiones(Model model) {
-		
-		List<Calculadora> calculadora = calculadoraService.obtenerInversion();
-		model.addAttribute("simulacion", new Calculadora());
-		//model.addAttribute("listarInversiones",calculadora);
-		return "listar";
-		
-	}
-	*/
-	/*
-	@PostMapping("/nueva")
-	public String guardarNuevaInversion(@ModelAttribute Calculadora calculadora) {
-	calculadoraService.crearInversion(calculadora);
-	return "redirect:/inversiones";
-		
-	}
-	*/
-	
 	@GetMapping("/nueva")
 	public String mostrarFormularioNuevaInversion(Model model) {
 		
 		model.addAttribute("calculadora", new Calculadora());
-		//model.addAttribute("accion","/calculadora/nueva");
 		return "formulario";
 	}
 	 @PostMapping("/nueva")
 	    public String procesarFormulario(@Valid @ModelAttribute Calculadora calculadora,BindingResult bindingResult, Model model) {
 		 
 		 if (bindingResult.hasErrors()) {
-			// model.addAttribute("error", "Por favor, corrige los errores en el formulario.");
 			 return "formulario";
 		 }
 
-	        /*if (calculadora.getCapital() < 100) {
-	            model.addAttribute("error", "El capital inicial debe ser mayor a 100 USD.");
-	            return "formulario";
-	        }*/
-
-	        // Obtener tasa de interés según número de periodos
 	        double tasa = calculadoraService.obtenerTasa(calculadora.getPeriodo());
 	        calculadora.setTasa(tasa);
 
-	        // Calcular monto final
 	        double monto = calculadoraService.calcularMontoFinal(
 	        		calculadora.getCapital(),
 	                tasa,
@@ -90,18 +59,14 @@ public class CalculadoraController {
 	        calculadora.setMonto(monto);
 	        calculadora.setInteres(monto - calculadora.getCapital());
 
-	        // Categorizar cliente
 	        calculadora.setCategoria(calculadoraService.categorizarCliente(
 	        		calculadora.getCapital(),
 	        		calculadora.getPeriodo()
 	        ));
 	        System.out.println("Guardando inversión: " + calculadora.getNombres() + ", monto: " + calculadora.getMonto());
-	        // Guardar en base de datos
 	        repo.save(calculadora);
 
 	        return "redirect:/calculadora/resultados";
 	    }
-	
-	
 	
 }
